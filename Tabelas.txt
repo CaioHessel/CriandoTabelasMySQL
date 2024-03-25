@@ -1,0 +1,315 @@
+create table pet(
+    nome		varchar(30) not null,
+    data_nasc		date,
+    especie		varchar(25),
+    id			int,
+    
+    primary key (id)
+);
+
+create table cliente(
+    nome		varchar(50) not null,
+    cpf			varchar(11) not null unique,
+    email		varchar(30),
+    telefone		varchar(20),
+    id 			int auto_increment not null,
+    id_especie		int,
+    
+    primary key (id),
+    foreign key (id_especie) references pet(id) 
+);
+
+insert into pet(nome, data_nasc, especie, id)
+	values
+		('Costelinha', '2011-10-15', 'Primata', 1),
+		('Princesa', '2005-03-01', 'Primata', 2),
+		('Joao', '2014-05-01', 'Felino', 3),
+		('Escuro', '2013-01-10', 'Reptil', 4),
+		('Capitu', '2000-08-20', 'Cão', 5),
+		('Bolt', '2015-11-12', 'Reptil', 6);
+        
+insert into cliente(nome, cpf, email, telefone, id_especie)
+	values
+		('Juvenal Amancio', '38745678151', 'juvenal@gmail.com', '(47) 3762-5181', 1),
+		('Ingrid Moraes', '37767897689', 'moraes@gmail.com', '(47) 3762-5181', 2),
+		('Maria Gonzales', '38810275590', 'gonzales@gmail.com', '(69) 3734-2521', 3),
+		('Francisca da Silva', '73646876883', 'chica@gmail.com', '(92) 2676-2592', 4),
+		('José Almir', '04166562347', 'jose@gmail.com', '(84) 2476-4134', 5),
+		('Maria Schimidt', '86756761749', 'maria@gmail.com', '(32) 2367-0493', 6);
+
+
+create table projeto(
+    nome 			varchar(30) not null,
+    faixa_etaria		int,
+    genero			varchar(30),
+    data_lanc			date not null,
+    id int,
+    
+    primary key (id)
+);
+
+create table desenvolvedor(
+    nome		varchar(50) not null,
+    cpf			varchar(11) not null unique,
+    data_nasc		date,
+    id			int not null auto_increment,
+    id_projeto		int,
+    
+    primary key (id),
+    foreign key (id_projeto) references projeto(id)
+);
+
+
+insert into projeto (nome, faixa_etaria, genero, data_lanc, id)
+	values
+		('Duken Nuken', 12, 'FPS', '1995-10-15', 1),
+		('Golden Axe', 10, 'Ação', '1990-10-15', 2),
+		('Zelda Ocarina of time', 8, 'RPG', '1995-08-01', 3),
+		('Mortal kombat Ultimate',16, 'Luta', '1996-09-10', 4),
+		('Baldrus Gate 3', 12, 'RPG', '2023-09-10', 5),
+		('Elden Ring', 15, 'RPG Ação', '2022-02-10', 6);
+
+insert into desenvolvedor (nome, cpf, data_nasc, id_projeto)
+	values
+		('Joao', '90367564050', '2001-08-19', 1),
+		('Maria', '33643962720', '2008-10-20', 3),
+		('Cleber', '78952606850', '2003-01-19', 2),
+		('Jonatan', '90892200383', '2011-04-05', 4),
+		('Clara', '51615839402', '2012-08-10', 5),
+		('Cecilia', '78643152404', '2002-09-11', 6);
+
+create table livro(
+    titulo		varchar(30) not null unique,
+    editora		varchar(30) not null,
+    qnt_pg		int,
+    check		(qnt_pg != 0),
+    acabamento		varchar(20),
+    id			int,
+    
+    primary key (id)
+);
+
+create table autor(
+    nome 		varchar(40) not null,
+    data_nasc		date,
+    email		varchar(30),
+    nacionalidade	varchar(20),
+    id			int auto_increment,
+    id_livro		int,
+    
+    primary key (id),
+    foreign key (id_livro) references livro(id)
+);
+
+insert into livro(titulo, editora, qnt_pg, acabamento, id)
+	values
+		('O alquimista', 'Paralela', '277', 'Acabamento mecânico', 1),
+		('Pai rico pai pobre', 'Alta books', '144', 'Capa dura', 2),
+		('Retórica', 'Edipro', '272', 'Comum', 3),
+		('Memórias do subsolo', 'Editora 34', '152', 'Capa mole', 4),
+		('Madame Curie', 'Editora altis', '442', 'Capa dura', 5),
+		('Cosmos', 'Gradiva publicações', '378', 'Dupla costura metálica', 6);
+
+insert into autor (nome, data_nasc, email, nacionalidade, id_livro)
+	values
+		('Carl Seagan', '1960-10-15', 'carl@gmail.com', 'Americano', 1),
+		('Paulo Coelho', '1957-08-01', 'paulocoelho@gmail.com', 'Brasileiro', 2),
+		('Robert Kyiosaki', '1971-12-10', 'robertk@gmail.com', 'Americano', 3),
+		('Aristóteles', '1358-01-20', 'aristoteles@gmail.com', 'Grego', 4),
+		('Fiodor Dostoievsk', '1821-09-03', 'fiodor@gmail.com', 'Russo', 5),
+		('Marie Curie', '1867-03-12', 'curiemarie@gmail.com', 'Polonesa', 6);
+
+create table montadora(
+    nome		varchar(20) not null,
+    site		varchar(30),
+    logotipo		blob,
+    id			int,
+    
+    primary key (id)
+);
+
+create table automovel (
+   placa			varchar(8) not null unique,
+    modelo			varchar(20) not null,
+    ano				date,
+    montadora			varchar(30),
+    id				int,
+    id_montadora		int,
+    
+    primary key (id),
+    foreign key (id_montadora) references montadora(id)
+);
+
+insert into montadora(nome, site, logotipo, id)
+	values
+		('Ford', 'ford@gmail.com', null, 1),
+		('Chevrolet', 'chevrolet@gmail.com', null, 2),
+		('Toyota', 'toyota@gmail.com', null, 3),
+		('Honda', 'honda@gmail.com', null, 4),
+		('Nissan', 'nissan@gmail.com', null, 5);
+
+insert into automovel (placa, modelo, ano, id_montadora)
+	values 
+		('JFM-1780', 'New Fiesta', '2012', 1),
+		('KEE-2103', 'Cruze LTZ', '2020', 2),
+		('NEO-8583', 'Corolla Altis', '2018', 3),
+		('HQY-4906', 'Civic', '2017', 4),
+		('HSV-1507', 'Versa', '2024', 5),
+		('MJS-9657', 'March', '2023', 5);
+
+
+create table marca (
+    nome			varchar(20) not null,
+    sac				varchar(20),
+    nacionalidade		varchar(20) not null,
+    id				int not null,
+    
+    primary key(id)
+);
+
+create table produto(
+    nome_produto	varchar(30),
+    qnt_estoque		int not null,
+    check		(qnt_estoque > 0),
+    preco		double not null,
+    id			int not null auto_increment,
+    id_marca		int,
+    
+    primary key(id),
+    foreign key (id_marca) references marca(id)
+);
+
+insert into marca (nome, sac, nacionalidade, id)
+	values
+		('Coca-Cola', '(69) 3734-2521', 'Americana', 1),
+		('Fini', '(84) 2476-4134', 'Brasileira', 2),
+		('PepsiCo', '(75) 3476-5138', 'Americana', 3),
+		('Nestle', '(92) 2676-2592', 'Sueca', 4),
+		('Mondelez', '(32) 2367-0493', 'Americana', 5),
+		('Fini', '(84) 2476-4134', 'Brasileira', 6);
+
+insert into produto(nome_produto, qnt_estoque, preco, id_marca)
+	values 
+		('Refrigetante lata', '20', '5.5', 1),
+		('Bala de ácida', '8', '4.5', 2),
+		('Ruffles', '20', '9.5', 3),
+		('Nescau', '12', '6.7', 4),
+		('Snickers', '14', '4.9', 5),
+		('Bala de goma', '21', '7.5', 2);
+
+create table ator(
+    nome 			varchar(30) not null unique,
+    nacionalidade		varchar(20),
+    data_nasc			date,
+    id 				int,
+    
+    primary key (id)
+);
+
+create table diretor(
+    nome			varchar(30) not null unique,
+    qnt_premio			int,
+    nacionalidade		varchar(20),
+    id				int,
+        
+    primary key(id)
+);
+
+create table filme(
+    valor			decimal(6,2) not null,
+    titulo			varchar(20) not null unique,
+    duracao			decimal(4,2),
+    idioma			varchar(20),
+    id				int not null auto_increment,
+    id_ator			int,
+    id_diretor			int,
+    
+    primary key (id),
+    foreign key (id_ator) references ator(id),
+    foreign key (id_diretor) references diretor(id)
+);
+
+insert into ator(nome, nacionalidade, data_nasc, id)
+	values
+		('Arnold Escapole', 'Hondurenho', '2000-10-05', 1),
+		('Rita Manfield', 'Porto riquenha', '1978-09-10', 2),
+		('Bruce Springs', 'Canadense', '1960-05-10', 3),
+		('Roger Walters', 'Inglês', '1950-01-04', 4),	
+		('Jean Cloude', 'Americano', '1970-09-24', 5),
+		('Cloude Troisgrois', 'Francês', '1994-02-02', 6);
+
+insert into diretor(nome, qnt_premio, nacionalidade, id)
+	values
+		('Martin Scorcese', 5, 'Americano', 1),
+		('Quentin Tarantino', 3, 'Italiano', 2),
+		('Steven Spielberg', 4, 'Americano', 3),
+		('James Cameron', 2, 'Canadense', 4),
+		('Tim Burton', 1, 'Americano', 5),
+		('Christopher Nolan', 2, 'Inglês', 6);
+
+insert into filme(valor, titulo, duracao, idioma, id_ator, id_diretor)
+	values
+		(55.2, 'Barrados no baile', '60', 'Inglês', 2, 3),
+		(45.8, 'Titanic', '75', 'Espanhol', 2, 1),
+		(95.7, 'Linha de frente', '80', 'Inglês', 4, 2),
+		(25.4, 'Debie & Loyd', '95', 'Italiano', 5, 4),
+		(31.7, 'Sniper Americano', '90', 'Inglês', 3, 5),
+		(60, 'Porto do mal', '85', 'Koreano', 1, 6);
+
+create table endereco(
+    bairro		varchar(30) not null,
+    rua			varchar(40),
+    cidade		varchar(25) not null,
+    id			int
+    
+    primary key(id)
+);
+
+create table aluno(
+    nome			varchar(30) not null,
+    email			varchar(20),
+    data_nasc			date not null unique,
+    id				int not null auto_increment,
+    id_endereco			int,
+    
+    primary key(id),
+    foreign key(id_endereco) references	endereco(id)    
+);
+
+insert into endereco(bairro, rua, cidade, id)
+	values
+		('Parque Residencial Nova Era', 'Rua Dois', 'Rondonópolis', 1),
+		('Bugio', 'Rua Nelson Maynard', 'Aracaju', 2),
+		('Planalto', 'Rua Anadia', 'Arapiraca', 3),
+		('Aeroporto', 'Rua 2 de Julho', 'Boa Vista', 4),
+		('Jardim Ouro Verde', 'Travessa Waldemar Felipe da Silva', 'Apucarana', 5),
+		('Taquara', 'Rua Projetada Trinta e Cinco', 'Rio de Janeiro', 6);
+
+insert into aluno(nome, email, data_nasc, id_endereco)
+	values
+		('Valentina Tainá Corona Flores', 'piedrasanta436@uoL.com', '1974-01-04', 1),
+		('David Ricardo Maldonado Jr.', 'naheed2020@gmail.com', '1992-04-16', 2),
+		('Luiza Marcela Beltrão', 'heli6493@hotmail.com', '1992-02-17', 3),
+		('Ivan Domingues', 'jacky7488@facens.com', '1975-09-29', 4),
+		('Ivone Suzana de Cruz', 'niceto5677@gmail.com', '2018-03-01', 5),
+		('Melissa Marés', 'fairy3197@uol.com', '1977-10-11', 6);
+
+create table colaborador(
+    nome		varchar(40),
+    cpf			varchar(11) not null unique,
+    cargo		varchar(25),
+    salario		decimal(10,2),
+    id			int not null auto_increment,
+    
+    primary key (id)
+);
+
+insert into colaborador(nome, cpf, cargo, salario)
+	values
+		('Paulo Meireles Neto', '028.907.110-05', 'Arquiteto de métricas dinâmicas', 3450),
+		('Jerônimo Roger de Faro Sobrinho', '748.564.100-08', 'Oficial de configuração central', 2450),
+		('Alexa Zara de Marinho', '417.901.000-38', 'Engenheiro de usabilidade interno', 5450),
+		('Janete Mariana Reis de Fonseca', '269.859.570-13', 'Estrategista de divisão sênior', 7450),
+		('Arlete Gomes', '765.539.230-78', 'Administrador de segurança regional', 6350),
+		('Diego Uchoa', '548.139.320-45', 'Oficial de aplicações do cliente', 4270);
+
