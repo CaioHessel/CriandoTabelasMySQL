@@ -1,0 +1,34 @@
+AGRUPAMENTO E INNER JOIN CIDADES ALUNOS
+
+
+create table Cidades(
+	id 		int		primary key,
+	nome		varchar(60)	not null,
+	populacao	int
+);
+
+create table Alunos(
+	id		int		primary key,
+	nome		varchar(60)	not null,
+	cidade_id	int,
+	foreign key(cidade_id) references Cidades(id)
+);
+
+
+insert into Alunos values (1, 'Immanuel Kant', '1724-04-22', 4);
+insert into Alunos values (2, 'Alan Turing', '1912-06-23', 3);
+insert into Alunos values (3, 'George Boole', '2002-01-01', 1);
+insert into Alunos values (4, 'Lynn Margulis', '1991-08-12', 3);
+insert into Alunos values (5, 'Nicola Tesla', '2090-01-08',null);
+insert into Alunos values (6, 'Ada Lovelace', '1978-05-28', 4);
+insert into Alunos values (7, 'Claude Shannon', '1982-10-15', 3);
+insert into Alunos values (8, 'Charles Darwin', '2010-02-06', null);
+insert into Alunos values (9, 'Marie Curie', '2007-07-12', 3);
+insert into Alunos values (10, 'Carl Sagan', '2000-11-20', 1);
+insert into Alunos values (11, 'Tim Berners-Lee', '1973-12-05', 4);
+insert into Alunos values (12, 'Richard Feynman', '1982-09-12', 1);
+
+
+select * from alunos as a inner join cidades as c on c.id = a.cidade_id order by c.nome;
+select * from alunos as a right join cidades as c on c.id = a.cidade_id order by a.id;
+select * from alunos as a left join cidades as c on c.id = a.cidade_id order by a.nome;
