@@ -1,0 +1,49 @@
+CREATE TABLE Animais
+(
+ID	int,
+nome	VARCHAR(50),
+nasc 	date,
+peso	decimal(10,2),
+cor	VARCHAR(50)
+);
+INSERT INTO Animais values (01, 'Ágata', date'2015-04-09', 13.9, 'branco');
+INSERT INTO Animais values (02, 'Félix', date'2016-06-06', 14.3, 'preto' );
+INSERT INTO Animais values (03, 'Tom', date'2013-02-08', 11.2, 'azul');
+INSERT INTO Animais values (04, 'Garfield', date'2015-07-06', 11.2, 'laranja');
+INSERT INTO Animais values (05, 'Frajola', date'2013-08-01', 13.7, 'preto');
+INSERT INTO Animais values (06, 'Manda-chuva', date'2012-02-03', 12.3, 'amarelo');
+INSERT INTO Animais values (07, 'Snowball' , date'2014-04-06', 13.2, 'preto' );
+INSERT INTO Animais values (10, 'Ágata' , date'2015-08-03', 11.9, 'azul' );
+INSERT INTO Animais values (11, 'Gato de Botas' , date'2012-12-10', 11.6, 'amarelo' );
+INSERT INTO Animais values (12, 'Kitty', date'2020-04-06', 11.6, 'amarelo' );
+INSERT INTO Animais values (13, 'Milu', date'2013-02-04', 17.9, 'branco' );
+INSERT INTO Animais values (14, 'Pluto', date'2012-01-03', 12.3, 'amarelo' );
+INSERT INTO Animais values (15, 'Pateta', date'2015-05-01', 17.7, 'preto' );
+INSERT INTO Animais values (16, 'Snoopy', date'2013-07-02', 18.2, 'branco' );
+INSERT INTO Animais values (17, 'Rex', date'2019-11-03', 19.7, 'beje' );
+INSERT INTO Animais values (20, 'Bidu', date'2012-09-08', 12.4, 'azul' );
+INSERT INTO Animais values (21, 'Dum Dum', date'2015-04-06', 11.2, 'laranja' );
+INSERT INTO Animais values (22, 'Muttley', date'2011-02-03', 14.3, 'laranja' );
+INSERT INTO Animais values (23, 'Scooby', date'2012-01-02', 19.9, 'marrom' );
+INSERT INTO Animais values (24, 'Rufus', date'2014-04-05', 19.7, 'branco' );
+INSERT INTO Animais values (25, 'Rex', date'2021-08-19', 19.7, 'branco' );
+
+
+update animais set nome = 'Goofy' where nome = 'Pateta';
+update animais set peso = 10 where nome = 'Garfield';
+update animais set cor = 'Laranja' where nome = 'Tom'; 
+update animais set cor = 'Laranja' where nome = 'Garfield';
+update animais set cor = 'Laranja' where nome = 'Frajola';
+update animais set cor = 'Laranja' where nome = 'Felix';
+update animais set cor = 'Laranja' where nome = 'Gato de botas';
+alter table animais add column altura decimal(3,2); 
+alter table animais add column observacao varchar(30);
+delete from animais where nome like 'C%';
+delete from animais where peso > 200;
+alter table animais drop column cor;
+alter table animais modify nome varchar(80);
+delete from animais where especie = 'Gato';
+delete from animais where especie = 'Cão';
+alter table animais drop column nasc;
+alter table animais drop column nome;
+drop table animais;
