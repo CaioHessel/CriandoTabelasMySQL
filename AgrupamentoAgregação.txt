@@ -1,0 +1,68 @@
+AGRUPAMENTO E AGREGAÇÃO
+
+CREATE table produtos(
+	nome 			varchar(30) not null,
+    preco			double not null,
+    estoque			int not null,
+    perecivel		boolean,
+    marca			varchar(20),
+    nacionalidade 	varchar(20),
+    id_produto		int auto_increment not null,
+    
+    primary key (id_produto)    
+);
+
+insert into produtos(nome, preco, estoque, perecivel, marca, nacionalidade)
+	values
+		('Suco de uva', 7.80, 20, false, 'Aurora', 'Brasileiro'),
+       	        ('Biscoito Wafer', 5.60, 30, false, 'Lacta', 'Canadense'),
+                ('Salame Italiano', 15.40, 10, true, 'Sadia', 'Brasileiro'),
+                ('Chocolate ao leite', 9.20, 15, false, 'Milka', 'Suiço'),
+                ('Energético', 10.90, 28, false, 'Red Bull', 'Americano');
+
+select * from produtos;
+select count(id_produto) from produtos;
+select avg(preco) as media_preco from produtos;
+select perecivel, avg(preco) as media_valores from produtos group by perecivel;
+select nome, avg(preco) as media_preco from produtos group by nome;
+select avg(preco) as preco_medio, sum(estoque) as total_estoque from produtos;
+select nome, preco, marca, estoque from produtos where preco >= (select max(preco) from produtos); 
+select nome, avg(preco) from produtos group by nome having avg(preco) > 9.78 ;
+select nacionalidade, count(nacionalidade) as qnt_por_nacionalidade from produtos group by nacionalidade;
+
+
+AGRUPAMENTO E INNER JOIN CIDADES ALUNOS
+
+
+create table Cidades(
+	id 		int		primary key,
+	nome		varchar(60)	not null,
+	populacao	int
+);
+
+create table Alunos(
+	id		int		primary key,
+	nome		varchar(60)	not null,
+	cidade_id	int,
+	foreign key(cidade_id) references Cidades(id)
+);
+
+
+insert into Alunos values (1, 'Immanuel Kant', '1724-04-22', 4);
+insert into Alunos values (2, 'Alan Turing', '1912-06-23', 3);
+insert into Alunos values (3, 'George Boole', '2002-01-01', 1);
+insert into Alunos values (4, 'Lynn Margulis', '1991-08-12', 3);
+insert into Alunos values (5, 'Nicola Tesla', '2090-01-08',null);
+insert into Alunos values (6, 'Ada Lovelace', '1978-05-28', 4);
+insert into Alunos values (7, 'Claude Shannon', '1982-10-15', 3);
+insert into Alunos values (8, 'Charles Darwin', '2010-02-06', null);
+insert into Alunos values (9, 'Marie Curie', '2007-07-12', 3);
+insert into Alunos values (10, 'Carl Sagan', '2000-11-20', 1);
+insert into Alunos values (11, 'Tim Berners-Lee', '1973-12-05', 4);
+insert into Alunos values (12, 'Richard Feynman', '1982-09-12', 1);
+
+
+select * from alunos as a inner join cidades as c on c.id = a.cidade_id order by c.nome;
+select * from alunos as a right join cidades as c on c.id = a.cidade_id order by a.id;
+select * from alunos as a left join cidades as c on c.id = a.cidade_id order by a.nome;
+
